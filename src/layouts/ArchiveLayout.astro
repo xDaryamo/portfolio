@@ -1,0 +1,53 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<BaseLayout title={title}>
+  <div class="archive-container">
+    <header class="archive-header">
+      <a href="/" class="back-link">
+        ← Back to Home
+      </a>
+      <h1 class="archive-title">{title}</h1>
+    </header>
+    
+    <main class="archive-main">
+      <slot />
+    </main>
+  </div>
+</BaseLayout>
+
+<style>
+  .archive-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 6rem 1.5rem 4rem;
+  }
+
+  .archive-header {
+    margin-bottom: 4rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    color: var(--green);
+    margin-bottom: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+  }
+
+  .archive-title {
+    font-size: 3rem;
+    color: var(--lightest-slate);
+  }
+
+  .archive-main {
+    width: 100%;
+  }
+</style>
