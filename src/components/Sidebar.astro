@@ -1,13 +1,27 @@
 ---
 import { Image } from 'astro:assets';
 import profilePhoto from '../assets/dario.png';
+import GlareHover from './react/GlareHover';
 ---
 <header class="sidebar">
   <div class="sidebar-content">
     <div class="identity">
-      <div class="profile-photo" id="profile-photo">
-        <div class="glare"></div>
-        <Image src={profilePhoto} alt="Dario Mazza" width={280} height={280} loading="eager" />
+      <div class="profile-photo-wrapper" id="profile-photo">
+        <GlareHover
+          width="100%"
+          height="100%"
+          borderRadius="24%"
+          background="var(--light-navy)"
+          borderColor="transparent"
+          glareColor="#ffffff"
+          glareOpacity={0.3}
+          glareAngle={-30}
+          glareSize={300}
+          transitionDuration={800}
+          playOnce={false}
+        >
+          <Image src={profilePhoto} alt="Dario Mazza" width={280} height={280} loading="eager" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '24%' }} />
+        </GlareHover>
       </div>
       <a href="/">
         <h1 class="name">Dario Mazza</h1>
@@ -86,10 +100,10 @@ import profilePhoto from '../assets/dario.png';
     padding: 5.5rem 0 3rem;
   }
 
-  .profile-photo {
+  .profile-photo-wrapper {
     margin-bottom: 2rem;
-    width: 140px;
-    height: 140px;
+    width: 250px;
+    height: 250px;
     border-radius: 24%;
     overflow: hidden;
     border: 1px solid var(--lightest-navy);
@@ -98,17 +112,9 @@ import profilePhoto from '../assets/dario.png';
     background-color: var(--light-navy);
   }
 
-  .profile-photo:hover {
-    transform: translateY(-5px);
-    border-color: var(--green);
-    box-shadow: 0 20px 30px -15px rgba(2, 12, 27, 0.7);
-  }
+  /* Target the Image inside the React component if needed, or rely on inline style passed to Image */
+  /* .profile-photo img styles removed as they are now inline or managed by GlareHover/Image props */
 
-  .profile-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
 
   .identity .name {
     font-size: 3rem;
