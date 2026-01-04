@@ -7,6 +7,7 @@ import '@fontsource/inter/800.css';
 import '@fontsource/inter/900.css';
 import '@fontsource/jetbrains-mono';
 import Squares from '../components/react/Squares';
+import ClickSpark from '../components/react/ClickSpark';
 
 interface Props {
   title: string;
@@ -27,20 +28,29 @@ const { title, description = "Personal Portfolio" } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
-    <div class="background-container">
-      <Squares 
-        client:only="react"
-        direction="diagonal"
-        speed={0.2}
-        borderColor="rgba(153, 153, 153, 0.01)" 
-        squareSize={40}
-        hoverFillColor="rgba(100, 255, 218, 0.05)"
-      />
-    </div>
-    
-    <main>
-      <slot />
-    </main>
+    <ClickSpark
+      client:idle
+      sparkColor='#fff'
+      sparkSize={10}
+      sparkRadius={15}
+      sparkCount={8}
+      duration={400}
+    >
+      <div class="background-container">
+        <Squares 
+          client:only="react"
+          direction="diagonal"
+          speed={0.2}
+          borderColor="rgba(153, 153, 153, 0.01)" 
+          squareSize={40}
+          hoverFillColor="rgba(100, 255, 218, 0.05)"
+        />
+      </div>
+      
+      <main>
+        <slot />
+      </main>
+    </ClickSpark>
   </body>
 </html>
 

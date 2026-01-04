@@ -32,7 +32,6 @@
 }
 
 .glare-hover:hover {
-  cursor: pointer;
 }
 
 .glare-hover:hover::before {
