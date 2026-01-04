@@ -15,7 +15,8 @@
     [
       "semantic-release-docker",
       {
-        "name": "ghcr.io/xdaryamo/portfolio"
+        "name": "ghcr.io/xdaryamo/portfolio",
+        "registryUrl": "ghcr.io"
       }
     ],
 
