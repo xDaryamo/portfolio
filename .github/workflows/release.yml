@@ -28,6 +28,9 @@ jobs:
       - name: Install dependencies
         run: npm install -g pnpm && pnpm install
 
+      - name: Build Docker Image
+        run: docker build -t ghcr.io/xdaryamo/portfolio .
+
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
