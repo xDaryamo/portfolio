@@ -1,3 +1,11 @@
+## [1.0.2](https://github.com/xDaryamo/portfolio/compare/v1.0.1...v1.0.2) (2026-01-04)
+
+
+### Bug Fixes
+
+* add registryUrl to semantic-release-docker configuration ([ffc0b10](https://github.com/xDaryamo/portfolio/commit/ffc0b100c8230701970d6782c3ae2319ec0bb691))
+* integrate Docker image publishing to GHCR ([6334ca8](https://github.com/xDaryamo/portfolio/commit/6334ca8e1ec7e24b61eab7c37ac2429f924eb72f))
+
 ## [1.0.1](https://github.com/xDaryamo/portfolio/compare/v1.0.0...v1.0.1) (2025-12-21)
 
 
