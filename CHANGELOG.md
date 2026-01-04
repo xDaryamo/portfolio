@@ -1,3 +1,11 @@
+## [1.0.3](https://github.com/xDaryamo/portfolio/compare/v1.0.2...v1.0.3) (2026-01-04)
+
+
+### Bug Fixes
+
+* update release workflow to build Docker image ([fd708e9](https://github.com/xDaryamo/portfolio/commit/fd708e9458e9a5986246b1d7be1475dddd99fcf7))
+* update release workflow to build Docker image ([dfcf107](https://github.com/xDaryamo/portfolio/commit/dfcf107df68a95ddd8b377c1313acb4d62f09c97))
+
 ## [1.0.2](https://github.com/xDaryamo/portfolio/compare/v1.0.1...v1.0.2) (2026-01-04)
 
 
