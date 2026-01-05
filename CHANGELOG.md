@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/xDaryamo/portfolio/compare/v1.0.3...v1.0.4) (2026-01-05)
+
+
+### Bug Fixes
+
+* update Dockerfile to simplify installation steps ([8c93310](https://github.com/xDaryamo/portfolio/commit/8c93310d581e6b8ac5779990f4bea91bf6dde5c3))
+
 ## [1.0.3](https://github.com/xDaryamo/portfolio/compare/v1.0.2...v1.0.3) (2026-01-04)
 
 
