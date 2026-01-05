@@ -8,5 +8,6 @@ export default defineConfig({
     },
     preview: {
       allowedHosts: true 
+    }
   }
 });
