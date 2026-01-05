@@ -1,3 +1,11 @@
+## [1.0.8](https://github.com/xDaryamo/portfolio/compare/v1.0.7...v1.0.8) (2026-01-05)
+
+
+### Bug Fixes
+
+* allow all hosts for dev and preview servers ([4cf94fa](https://github.com/xDaryamo/portfolio/commit/4cf94fa28d4cbdbc440a5be3be5836114cf51c23))
+* remove allowedHosts from Vite configuration ([174faeb](https://github.com/xDaryamo/portfolio/commit/174faeba5e72e831da1d5474f6b059b396f0714f))
+
 ## [1.0.7](https://github.com/xDaryamo/portfolio/compare/v1.0.6...v1.0.7) (2026-01-05)
 
 
