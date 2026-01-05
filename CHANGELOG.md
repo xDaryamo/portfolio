@@ -1,3 +1,11 @@
+## [1.0.12](https://github.com/xDaryamo/portfolio/compare/v1.0.11...v1.0.12) (2026-01-05)
+
+
+### Bug Fixes
+
+* restructure Vite configuration for server and preview settings ([597d046](https://github.com/xDaryamo/portfolio/commit/597d046b15497527d98c1a6de5e70946f9236ecf))
+* update allowed host in Docker CMD to 'all' ([24a806e](https://github.com/xDaryamo/portfolio/commit/24a806edf8df3561046887cddcba3909d2dfe2e8))
+
 ## [1.0.11](https://github.com/xDaryamo/portfolio/compare/v1.0.10...v1.0.11) (2026-01-05)
 
 
