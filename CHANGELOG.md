@@ -1,3 +1,11 @@
+## [1.0.10](https://github.com/xDaryamo/portfolio/compare/v1.0.9...v1.0.10) (2026-01-05)
+
+
+### Bug Fixes
+
+* add missing closing brace in Vite configuration ([8d1bf3a](https://github.com/xDaryamo/portfolio/commit/8d1bf3aec1125083560223b25496121bdf1b4ba4))
+* configure Vite server and preview allowed hosts ([1b74916](https://github.com/xDaryamo/portfolio/commit/1b749165ae2196862af31fe2d54ebb7ab0884147))
+
 ## [1.0.9](https://github.com/xDaryamo/portfolio/compare/v1.0.8...v1.0.9) (2026-01-05)
 
 
