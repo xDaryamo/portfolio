@@ -1,3 +1,10 @@
+## [1.0.11](https://github.com/xDaryamo/portfolio/compare/v1.0.10...v1.0.11) (2026-01-05)
+
+
+### Bug Fixes
+
+* update Dockerfile ([f8c9831](https://github.com/xDaryamo/portfolio/commit/f8c983110f7781b2fefa05f42bd5dcd9221e2b97))
+
 ## [1.0.10](https://github.com/xDaryamo/portfolio/compare/v1.0.9...v1.0.10) (2026-01-05)
 
 
