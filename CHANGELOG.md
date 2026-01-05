@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/xDaryamo/portfolio/compare/v1.0.4...v1.0.5) (2026-01-05)
+
+
+### Bug Fixes
+
+* add start script to package.json ([47c12de](https://github.com/xDaryamo/portfolio/commit/47c12de551587a408b9e0eecba33fe0e0c68828e))
+
 ## [1.0.4](https://github.com/xDaryamo/portfolio/compare/v1.0.3...v1.0.4) (2026-01-05)
 
 

@@ -1,12 +1,12 @@
 {
   "name": "tmp-project",
   "type": "module",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "scripts": {
     "dev": "astro dev --host",
     "build": "astro build",
     "preview": "astro preview",
-    "start": "astro preview", 
+    "start": "astro preview",
     "astro": "astro",
     "commit": "cz"
   },
