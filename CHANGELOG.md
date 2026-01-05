@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/xDaryamo/portfolio/compare/v1.0.5...v1.0.6) (2026-01-05)
+
+
+### Bug Fixes
+
+* update CMD to use astro preview command ([540f888](https://github.com/xDaryamo/portfolio/commit/540f888b781562464b21927ca0dd8899ab238da9))
+
 ## [1.0.5](https://github.com/xDaryamo/portfolio/compare/v1.0.4...v1.0.5) (2026-01-05)
 
 
