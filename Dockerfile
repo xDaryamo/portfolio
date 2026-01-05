@@ -20,5 +20,5 @@ ENV PORT=4321
 
 EXPOSE 4321
 
-CMD ["pnpm", "start"]
+CMD ["pnpm", "astro", "preview", "--host", "0.0.0.0"]
 
