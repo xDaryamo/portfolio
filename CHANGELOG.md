@@ -1,3 +1,10 @@
+## [1.0.9](https://github.com/xDaryamo/portfolio/compare/v1.0.8...v1.0.9) (2026-01-05)
+
+
+### Bug Fixes
+
+* add allowed host to Docker CMD ([02b46ac](https://github.com/xDaryamo/portfolio/commit/02b46acccb043d3883166353a812931e2abd82c0))
+
 ## [1.0.8](https://github.com/xDaryamo/portfolio/compare/v1.0.7...v1.0.8) (2026-01-05)
 
 
