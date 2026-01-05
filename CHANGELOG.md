@@ -1,3 +1,10 @@
+## [1.0.7](https://github.com/xDaryamo/portfolio/compare/v1.0.6...v1.0.7) (2026-01-05)
+
+
+### Bug Fixes
+
+* configure allowedHosts for Vite in astro.config.mjs ([73cb1c2](https://github.com/xDaryamo/portfolio/commit/73cb1c2ae8873b1695b13d0d129a28734112c543))
+
 ## [1.0.6](https://github.com/xDaryamo/portfolio/compare/v1.0.5...v1.0.6) (2026-01-05)
 
 
