@@ -1,0 +1,70 @@
+<section id="projects" class="section">
+  <h2 class="section-title">Projects</h2>
+  <div class="project-card">
+    <h3>Project One</h3>
+    <p>A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information of each track. Built with React, Styled Components, and the Spotify Web API.</p>
+    <div class="tags">
+      <span>React</span>
+      <span>Express</span>
+      <span>Spotify API</span>
+      <span>Heroku</span>
+    </div>
+  </div>
+  <div class="project-card">
+    <h3>Project Two</h3>
+    <p>A minimal, dark blue theme for VS Code, Sublime Text, Atom, iTerm, and more. Available on Visual Studio Marketplace, Package Control, Atom Package Manager, and npm.</p>
+    <div class="tags">
+      <span>VS Code</span>
+      <span>Theme</span>
+    </div>
+  </div>
+  <div class="project-card">
+    <h3>Project Three</h3>
+    <p>A robust web app for managing inventory and sales for a local business. Features include real-time stock tracking, sales reporting, and user management.</p>
+    <div class="tags">
+      <span>Vue.js</span>
+      <span>Firebase</span>
+      <span>Tailwind</span>
+    </div>
+  </div>
+  <div class="project-card">
+    <h3>Project Four</h3>
+    <p>An interactive data visualization dashboard for tracking global climate change metrics. Uses D3.js for complex charts and maps.</p>
+    <div class="tags">
+      <span>D3.js</span>
+      <span>React</span>
+      <span>Node.js</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .project-card {
+    background-color: var(--light-navy);
+    padding: 2rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    transition: transform 0.2s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .project-card h3 {
+    color: var(--green);
+  }
+
+  .tags {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .tags span {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--green);
+  }
+</style>
