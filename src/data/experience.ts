@@ -14,7 +14,7 @@ export const jobs: Job[] = [
     title: 'Research Assistant & Open Source Contributor',
     company: 'JADS (Jheronimus Academy of Data Science)',
     location: "'s-Hertogenbosch, Netherlands",
-    range: 'Mar 2025 — Jun 2025',
+    range: 'Feb 2025 — Jun 2025',
     url: 'https://www.jads.nl/',
     summary:
       'Conducted research on Infrastructure-as-Code (IaC) interoperability as part of my Master’s Thesis. I engineered a proof-of-concept pipeline to reverse-engineer proprietary AWS Terraform configurations into the open standard TOSCA 2.0, comparing deterministic parsing techniques against AI-driven approaches using Retrieval-Augmented Generation (RAG).',

@@ -1,0 +1,114 @@
+---
+import ArchiveLayout from '../layouts/ArchiveLayout.astro';
+import { projects } from '../data/projects';
+
+---
+
+<ArchiveLayout title="Archive">
+  <table class="archive-table">
+    <thead>
+      <tr>
+        <th>Year</th>
+        <th>Title</th>
+        <th class="hide-on-mobile">Built with</th>
+        <th>Link</th>
+      </tr>
+    </thead>
+    <tbody>
+      {projects.map((project) => (
+        <tr>
+          <td class="year">2024</td>
+          <td class="title">{project.title}</td>
+          <td class="tech hide-on-mobile">
+            {project.tech.map((t, i) => (
+              <span class="tech-item">
+                {t}{i < project.tech.length - 1 ? ' · ' : ''}
+              </span>
+            ))}
+          </td>
+          <td class="links">
+            {project.external && (
+              <a href={project.external} target="_blank" rel="noreferrer" aria-label="External Link">
+                <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </a>
+            )}
+            {project.github && (
+              <a href={project.github} target="_blank" rel="noreferrer" aria-label="GitHub Link">
+                <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+              </a>
+            )}
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</ArchiveLayout>
+
+<style>
+  .archive-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  .archive-table th,
+  .archive-table td {
+    padding: 1rem;
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  .archive-table th {
+    color: var(--slate);
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .archive-table td {
+    color: var(--light-slate);
+    font-size: 1rem;
+    border-bottom: 1px solid var(--light-navy);
+  }
+
+  .year {
+    color: var(--green);
+    font-family: var(--font-mono);
+    font-size: 0.9rem !important;
+  }
+
+  .title {
+    font-weight: 600;
+    color: var(--lightest-slate) !important;
+  }
+
+  .tech {
+    font-family: var(--font-mono);
+    font-size: 0.8rem !important;
+  }
+
+  .links {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .links a {
+    color: var(--light-slate);
+    transition: color 0.2s;
+  }
+
+  .links a:hover {
+    color: var(--green);
+  }
+
+  .links svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .hide-on-mobile {
+      display: none;
+    }
+  }
+</style>
