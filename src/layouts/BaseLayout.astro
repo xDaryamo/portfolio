@@ -35,7 +35,7 @@ const { title, description = "Personal Portfolio" } = Astro.props;
       sparkRadius={15}
       sparkCount={8}
       duration={400}
-    >
+    />
       <div class="background-container">
         <Squares 
           client:only="react"
@@ -50,7 +50,6 @@ const { title, description = "Personal Portfolio" } = Astro.props;
       <main>
         <slot />
       </main>
-    </ClickSpark>
   </body>
 </html>
 

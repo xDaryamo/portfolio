@@ -11,7 +11,7 @@ export interface Job {
 
 export const jobs: Job[] = [
   {
-    title: 'Research Assistant & Open Source Contributor',
+    title: 'Research Assistant (Erasmus+ Traineeship)',
     company: 'JADS (Jheronimus Academy of Data Science)',
     location: "'s-Hertogenbosch, Netherlands",
     range: 'Feb 2025 — Jun 2025',

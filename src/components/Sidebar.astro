@@ -26,20 +26,22 @@ import GlareHover from './react/GlareHover';
       <a href="/">
         <h1 class="name">Dario Mazza</h1>
       </a>
-      <h2 class="title">Software Engineer</h2>
-      <p class="tagline">I build accessible, pixel-perfect, performant, and reliable web experiences.</p>
+      <h2 class="title">Junior Cloud-Native Engineer</h2>
+      <p class="tagline">Passionate about how great software actually runs in production.</p>
     </div>
 
     <nav class="nav">
       <ul>
         <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#education" class="nav-link">Education</a></li>
         <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#certifications" class="nav-link">Certifications</a></li>
       </ul>
     </nav>
 
     <div class="socials">
-      <a href="https://github.com" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+      <a href="https://github.com/xDaryamo" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
       </a>
       <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
@@ -55,34 +57,71 @@ import GlareHover from './react/GlareHover';
 <script>
   const navLinks = document.querySelectorAll('.nav-link');
   const sections = document.querySelectorAll('section');
+  const visibleSections = new Set();
 
-  const observerOptions = {
-    root: null,
-    rootMargin: '-20% 0px -70% 0px', // Focus on a narrow band near the top
-    threshold: 0
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        navLinks.forEach((link) => {
-          link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
-        });
-      }
-    });
-  }, observerOptions);
-
-  sections.forEach((section) => observer.observe(section));
-
-  // Fallback for top of page
-  window.addEventListener('scroll', () => {
+  function updateActiveNav() {
+    // 1. Check Top (Priority: Top wins if page is very short and at top)
     if (window.scrollY < 100) {
       navLinks.forEach((link, i) => {
         link.classList.toggle('active', i === 0);
       });
+      return;
     }
+
+    // 2. Check Bottom (Priority: Bottom wins if we are strictly at the bottom)
+    // Use a small buffer to ensure we catch the bottom on all browsers
+    if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 10) {
+      navLinks.forEach((link) => link.classList.remove('active'));
+      if (navLinks.length > 0) {
+        navLinks[navLinks.length - 1].classList.add('active');
+      }
+      return;
+    }
+
+    // 3. Standard Intersection Logic
+    navLinks.forEach((link) => link.classList.remove('active'));
+
+    // Find the last visible section (priority to lower sections during transition)
+    let activeId = null;
+    // Iterate in DOM order
+    sections.forEach((section) => {
+      const id = section.getAttribute('id');
+      if (visibleSections.has(id)) {
+        activeId = id;
+      }
+    });
+
+    if (activeId) {
+      const activeLink = document.querySelector(`.nav-link[href="#${activeId}"]`);
+      if (activeLink) {
+        activeLink.classList.add('active');
+      }
+    }
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const id = entry.target.getAttribute('id');
+      if (entry.isIntersecting) {
+        visibleSections.add(id);
+      } else {
+        visibleSections.delete(id);
+      }
+    });
+    updateActiveNav();
+  }, {
+    rootMargin: '-30% 0px -60% 0px',
+    threshold: 0
+  });
+
+  sections.forEach((section) => observer.observe(section));
+
+  window.addEventListener('scroll', () => {
+    updateActiveNav();
   }, { passive: true });
+
+  // Initial check
+  updateActiveNav();
 </script>
 
 <style>
