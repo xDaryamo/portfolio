@@ -26,7 +26,7 @@ const fetchOgImage = async (url: string): Promise<string | null> => {
 };
 
 const projectsWithImages = await Promise.all(
-  projects.map(async (project) => {
+  projects.slice(0, 4).map(async (project) => {
     let image = project.image;
     if (!image) {
       const targetUrl = project.github || project.external;
@@ -92,7 +92,7 @@ const projectsWithImages = await Promise.all(
                     <a href={mainLink} target="_blank" rel="noreferrer" class="project-link">
                       <span class="title">
                         {project.title}
-                        <Icon name="heroicons:arrow-top-right-on-square-20-solid" class="link-icon" />
+                        <Icon name="heroicons:arrow-up-right-20-solid" class="link-icon" />
                       </span>
                     </a>
                   ) : (
