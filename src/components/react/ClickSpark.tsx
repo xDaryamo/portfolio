@@ -39,7 +39,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
     const parent = canvas.parentElement;
     if (!parent) return;
 
-    let resizeTimeout: NodeJS.Timeout;
+    let resizeTimeout: ReturnType<typeof setTimeout>;
 
     const resizeCanvas = () => {
       const { width, height } = parent.getBoundingClientRect();
@@ -164,8 +164,7 @@ const ClickSpark: React.FC<ClickSparkProps> = ({
         style={{
           position: 'absolute',
           inset: 0,
-          pointerEvents: 'none',
-          zIndex: 9999 
+          pointerEvents: 'none'
         }}
       />
       {children}

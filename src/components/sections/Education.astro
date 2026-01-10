@@ -1,15 +1,7 @@
 ---
 import { education } from '../../data/education';
 import { Icon } from 'astro-icon/components';
-
-const parseMarkdown = (text: string) => {
-  return text
-    .replace(
-      /\[([^\]]+)\]\(([^)]+)\)/g,
-      '<a href="$2" target="_blank" rel="noreferrer" class="inline-link">$1<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="inline-link-icon" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd" /></svg></a>'
-    )
-    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-};
+import Markdown from '../Markdown.astro';
 ---
 
 <section id="education" class="section">
@@ -30,7 +22,7 @@ const parseMarkdown = (text: string) => {
                     <a href={edu.url} target="_blank" rel="noreferrer" class="edu-link">
                       <span class="degree">
                         {edu.degree}
-                        <Icon name="heroicons:arrow-top-right-on-square-20-solid" class="link-icon" />
+                        <Icon name="heroicons:arrow-up-right-20-solid" class="link-icon" />
                       </span>
                       <span class="institution">{edu.institution}</span>
                     </a>
@@ -41,10 +33,10 @@ const parseMarkdown = (text: string) => {
                     </>
                   )}
                 </h3>
-                {edu.summary && <p class="summary" set:html={parseMarkdown(edu.summary)}></p>}
+                {edu.summary && <p class="summary"><Markdown content={edu.summary} /></p>}
                 <div class="achievements">
                   {edu.achievements.map((item) => (
-                    <p set:html={parseMarkdown(item)}></p>
+                    <p><Markdown content={item} /></p>
                   ))}
                 </div>
               </div>
@@ -228,22 +220,5 @@ const parseMarkdown = (text: string) => {
     font-size: 0.9rem;
     color: var(--slate);
     line-height: 1.5;
-  }
-
-  :global(.inline-link) {
-    display: inline-flex;
-    align-items: baseline;
-  }
-
-  :global(.inline-link-icon) {
-    width: 0.9em;
-    height: 0.9em;
-    margin-left: 0.1rem;
-    transition: transform 0.2s;
-    flex-shrink: 0;
-  }
-
-  :global(.inline-link:hover .inline-link-icon) {
-    transform: translate(2px, -2px);
   }
 </style>

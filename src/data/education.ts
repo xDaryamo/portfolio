@@ -14,7 +14,7 @@ export const education: EducationItem[] = [
     institution: 'Università degli Studi di Salerno',
     range: 'Dec 2022 — Oct 2025',
     url: 'https://web.unisa.it/en/home',
-    summary: '<strong>Final Grade:</strong> 110/110 with honors',
+    summary: '**Final Grade:** 110/110 with honors',
     achievements: [
       'Major in Software Engineering & IT Management',
     ],
@@ -24,9 +24,9 @@ export const education: EducationItem[] = [
     institution: 'Università degli Studi di Salerno',
     range: 'Sep 2019 — Dec 2022',
     url: 'https://web.unisa.it/en/home',
-    summary: '<strong>Final Grade:</strong> 110/110 with honors',
+    summary: '**Final Grade:** 110/110 with honors',
     achievements: [
-      '<strong>Apple Foundation Program:</strong> Secured admission (ranked Top 10 among 65+ applicants) to develop an AR iOS game using Swift and ARKit within a 4-week intensive framework.',
+      '**Apple Foundation Program:** Secured admission (ranked Top 10 among 65+ applicants) to develop an AR iOS game using Swift and ARKit within a 4-week intensive framework.',
     ],
   },
 ];
