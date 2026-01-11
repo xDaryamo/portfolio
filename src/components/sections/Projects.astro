@@ -1,0 +1,392 @@
+---
+import { Image } from 'astro:assets';
+import { projects } from '../../data/projects';
+import { Icon } from 'astro-icon/components';
+import Markdown from '../Markdown.astro';
+
+const fetchOgImage = async (url: string): Promise<string | null> => {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) return null;
+    const html = await response.text();
+    const match = html.match(/<meta property="og:image" content="([^"]+)"/);
+    return match ? match[1] : null;
+  } catch (error) {
+    console.error(`Error fetching OG image for ${url}:`, error);
+    return null;
+  }
+};
+
+const projectsWithImages = await Promise.all(
+  projects.slice(0, 4).map(async (project) => {
+    let image = project.image;
+    if (!image) {
+      const targetUrl = project.github || project.external;
+      if (targetUrl && targetUrl !== '#') {
+        image = await fetchOgImage(targetUrl) || undefined;
+      }
+    }
+    return { ...project, image };
+  })
+);
+---
+
+<section id="projects" class="section">
+  <div class="projects-group">
+    {
+      projectsWithImages.map((project) => {
+        const isLocked = project.isPrivate;
+        const mainLink = isLocked ? null : (project.external || project.github);
+        // Check if image is an imported asset (object) or a URL string
+        const isLocalImage = typeof project.image === 'object' && project.image !== null;
+
+        const footerLinks = [];
+        if (project.links) {
+          footerLinks.push(...project.links.map(l => ({ ...l, isGithub: false })));
+        }
+
+        return (
+          <div class="project-card group">
+            <div class="grid-layout">
+              <div class="image-container">
+                 {project.image && (
+                    mainLink ? (
+                      <a href={mainLink} target="_blank" rel="noreferrer" class="image-link project-image-wrapper">
+                        {isLocalImage ? (
+                          <Image src={project.image as ImageMetadata} alt={project.title} class="project-image" />
+                        ) : (
+                          <img src={project.image as string} alt={project.title} class="project-image" />
+                        )}
+                      </a>
+                    ) : (
+                      <div class="project-image-wrapper locked-wrapper">
+                        {isLocalImage ? (
+                          <Image src={project.image as ImageMetadata} alt={project.title} class="project-image" />
+                        ) : (
+                          <img src={project.image as string} alt={project.title} class="project-image" />
+                        )}
+                      </div>
+                    )
+                 )}
+              </div>
+              <div class="content-col">
+                <h3 class="project-header">
+                  {isLocked ? (
+                    <span class="title locked">
+                      {project.title}
+                      <Icon name="heroicons:lock-closed-20-solid" class="lock-icon" />
+                      {project.privateReason && <span class="private-badge">{project.privateReason}</span>}
+                    </span>
+                  ) : mainLink ? (
+                    <a href={mainLink} target="_blank" rel="noreferrer" class="project-link">
+                      <span class="title">
+                        {project.title}
+                        <Icon name="heroicons:arrow-up-right-20-solid" class="link-icon" />
+                      </span>
+                    </a>
+                  ) : (
+                    <span class="title">{project.title}</span>
+                  )}
+                </h3>
+                
+                                <p class="description">
+                                  <Markdown content={project.description} />
+                                </p>
+                
+                                <div class="project-links">
+                                  {footerLinks.map((link) => (
+                                    <a href={link.url} target="_blank" rel="noreferrer" class="text-link">
+                                      <Icon name={link.isGithub ? "mdi:github" : "heroicons:paper-clip-20-solid"} class="mini-icon" />
+                                      {link.label}
+                                    </a>
+                                  ))}
+                                </div>
+                
+                                <div class="tech-pills">
+                                  {project.tech.map((tech) => (
+                                    <span class="pill">{tech}</span>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })
+                    }
+                  </div>
+                
+                  <div class="archive-link-container">
+                    <a href="/archive" class="archive-link">
+                      <span class="link-text">View Full Project Archive</span>
+                      <Icon name="heroicons:arrow-right-20-solid" class="arrow-icon" />
+                    </a>
+                  </div>
+                </section>
+                
+                <style>
+                  .projects-group {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                  }
+                
+                  .project-card {
+                    position: relative;
+                    display: block;
+                    text-decoration: none;
+                    color: inherit;
+                    padding: 1.5rem;
+                    border-radius: 0.5rem;
+                    transition: all 0.3s ease;
+                    overflow: hidden;
+                    background: transparent;
+                    border: 1px solid transparent;
+                  }
+                
+                  .project-card:hover {
+                    background-color: rgba(255, 255, 255, 0.03);
+                    box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.3);
+                    border-color: rgba(255, 255, 255, 0.05);
+                  }
+                  
+                  /* Layout */
+                  .grid-layout {
+                    position: relative;
+                    z-index: 1;
+                    display: grid;
+                    grid-template-columns: 100px 1fr; /* Fixed small width for the image column */
+                    gap: 1rem;
+                    align-items: start;
+                  }
+                
+                  @media (min-width: 640px) {
+                    .grid-layout {
+                      grid-template-columns: 150px 1fr; /* Match Experience.astro date column width */
+                      gap: 1.5rem;
+                    }
+                  }
+                
+                  /* Image Column */
+                  .image-container {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    padding-top: 0.25rem;
+                  }
+                
+                  .project-image-wrapper {
+                    display: block;
+                    width: 100%;
+                    max-width: 120px; /* Prevent it from being too large */
+                    aspect-ratio: 16 / 9;
+                    border-radius: 4px;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    background-color: rgba(0, 0, 0, 0.2);
+                    overflow: hidden;
+                    transition: border-color 0.2s;
+                  }
+                  
+                  .project-image {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    display: block;
+                  }
+                  
+                  .project-card:hover .project-image-wrapper {
+                    border-color: rgba(255, 255, 255, 0.3);
+                  }
+                
+                  /* Content Column */
+                  .project-header {
+                    margin: 0;
+                    padding: 0;
+                    font-size: 1.1rem;
+                    font-weight: 600;
+                    line-height: 1.2;
+                    color: var(--lightest-slate);
+                    margin-bottom: 0.5rem;
+                  }
+                
+                  .project-header .title {
+                    color: var(--lightest-slate);
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                  }
+                
+                  .title.locked {
+                    cursor: default;
+                  }
+                
+                  .lock-icon {
+                    width: 1.1rem;
+                    height: 1.1rem;
+                    color: var(--slate);
+                  }
+                
+                  .private-badge {
+                    font-size: 0.7rem;
+                    font-family: var(--font-mono);
+                    background-color: rgba(255, 255, 255, 0.05);
+                    color: var(--slate);
+                    padding: 0.1rem 0.4rem;
+                    border-radius: 4px;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    font-weight: 400;
+                    margin-left: 0.25rem;
+                  }
+                
+                  .project-link {
+                    display: inline-block;
+                  }
+                
+                  .link-icon {
+                    width: 1.25rem;
+                    height: 1.25rem;
+                    transition: all 0.2s ease;
+                    color: var(--slate);
+                  }
+                
+                  .project-link:hover .link-icon,
+                  .image-container:hover ~ .content-col .project-link .link-icon {
+                    color: var(--green);
+                    transform: translate(2px, -2px);
+                  }
+                
+                  .project-link:hover .title,
+                  .image-container:hover ~ .content-col .project-link .title {
+                    color: var(--green);
+                  }
+                
+                  /* Ensure nested links are clickable by putting them above the stretched link */
+                  .description a {
+                    position: relative;
+                    z-index: 10;
+                    color: var(--green);
+                    text-decoration: none;
+                  }
+                
+                  .description a:hover {
+                    text-decoration: underline;
+                  }
+                
+                  .description {
+                    font-size: 1rem;
+                    color: var(--slate);
+                    margin-bottom: 1rem;
+                    line-height: 1.5;
+                    position: relative;
+                    z-index: 1;
+                  }
+                
+                  /* Links Row */
+                  .project-links {
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    gap: 1rem;
+                    margin-bottom: 1rem;
+                    position: relative;
+                    z-index: 2; /* Ensure clickable */
+                  }
+                
+                  .icon-link {
+                    color: var(--slate);
+                    transition: color 0.2s;
+                  }
+                
+                  .icon-link:hover {
+                    color: var(--green);
+                  }
+                
+                  .icon-link svg {
+                    width: 1.25rem;
+                    height: 1.25rem;
+                  }
+                
+                  .text-link {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.25rem;
+                    font-size: 0.85rem;
+                    font-family: var(--font-mono);
+                    color: var(--slate);
+                    text-decoration: none;
+                    transition: color 0.2s;
+                  }
+                
+                  .text-link:hover {
+                    color: var(--green);
+                  }
+                  
+                  .mini-icon {
+                    width: 1rem;
+                    height: 1rem;
+                  }
+                
+                  /* Tech Pills */
+                  .tech-pills {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 0.5rem;
+                    position: relative;
+                    z-index: 1;
+                  }
+                
+                  .pill {
+                    background-color: rgba(100, 255, 218, 0.1);
+                    color: var(--green);
+                    font-family: var(--font-mono);
+                    font-size: 0.75rem;
+                    padding: 0.25rem 0.75rem;
+                    border-radius: 9999px;
+                    transition: color 0.2s, background-color 0.2s;
+                  }
+                
+                  .project-card:hover .pill {
+                    background-color: rgba(100, 255, 218, 0.15);
+                  }
+                
+                  /* Archive Link */
+                  .archive-link-container {
+                    margin-top: 2rem;
+                    padding-left: 1.5rem;
+                  }
+                
+                  .archive-link {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 0.5rem;
+                    font-family: var(--font-mono);
+                    font-size: 1rem;
+                    color: var(--green);
+                    text-decoration: none;
+                    position: relative;
+                  }
+                
+                  .archive-link::after {
+                    content: '';
+                    position: absolute;
+                    width: 0;
+                    height: 1px;
+                    bottom: -2px;
+                    left: 0;
+                    background-color: var(--green);
+                    transition: width 0.2s ease;
+                  }
+                
+                  .archive-link:hover::after {
+                    width: 100%;
+                  }
+                
+                  .arrow-icon {
+                    width: 1.25rem;
+                    height: 1.25rem;
+                    transition: transform 0.2s ease;
+                  }
+                
+                  .archive-link:hover .arrow-icon {
+                    transform: translateX(5px);
+                  }
+                </style>

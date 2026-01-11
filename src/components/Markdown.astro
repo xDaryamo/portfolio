@@ -1,0 +1,51 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  content: string;
+}
+
+const { content } = Astro.props;
+
+// Split by links [text](url) and bold **text**
+const parts = content.split(/(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*)/g);
+---
+{
+  parts.map((part) => {
+    if (part.startsWith('[') && part.includes('](')) {
+      const match = part.match(/\[([^\]]+)\]\(([^)]+)\)/);
+      if (match) {
+        return (
+          <a href={match[2]} target="_blank" rel="noreferrer" class="inline-link">
+            <Astro.self content={match[1]} />
+            <Icon name="heroicons:arrow-up-right-20-solid" class="inline-link-icon" aria-hidden="true" />
+          </a>
+        );
+      }
+    }
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return <strong><Astro.self content={part.slice(2, -2)} /></strong>;
+    }
+    return <Fragment set:html={part} />;
+  })
+}
+
+<style>
+  .inline-link {
+    display: inline-flex;
+    align-items: baseline;
+    text-decoration: none;
+  }
+
+  .inline-link-icon {
+    width: 0.9em;
+    height: 0.9em;
+    margin-left: 0.1rem;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+
+  .inline-link:hover .inline-link-icon {
+    transform: translate(2px, -2px);
+  }
+</style>

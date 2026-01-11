@@ -1,0 +1,310 @@
+---
+import { Image } from 'astro:assets';
+import profilePhoto from '../assets/profile/dario.png';
+import PixelCard from './react/PixelCard';
+import GlareHover from './react/GlareHover';
+import { Icon } from 'astro-icon/components';
+---
+<header class="sidebar">
+  <div class="sidebar-content">
+    <div class="identity">
+      <div class="profile-photo-wrapper" id="profile-photo">
+        <GlareHover
+          width="100%"
+          height="100%"
+          borderRadius="24%"
+          background="var(--light-navy)"
+          borderColor="transparent"
+          glareColor="#ffffff"
+          glareOpacity={0.3}
+          glareAngle={-30}
+          glareSize={300}
+          transitionDuration={800}
+          playOnce={false}
+        >
+          <Image src={profilePhoto} alt="Dario Mazza" width={280} height={280} loading="eager" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '24%' }} />
+        </GlareHover>
+      </div>
+      <a href="/">
+        <h1 class="name">Dario Mazza</h1>
+      </a>
+      <h2 class="title">Junior Cloud-Native Engineer</h2>
+      <p class="tagline">Passionate about how great software actually runs in production.</p>
+      <div class="resume-cta">
+        <PixelCard
+          client:only="react"
+          className="resume-pixel-card"
+          colors="#64ffda"
+          gap={8}
+        >
+          <a
+            href="/Dario_Mazza_Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            download="Dario_Mazza_Resume.pdf"
+            class="resume-link"
+          >
+            Download Full Resume
+          </a>
+        </PixelCard>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <ul>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#education" class="nav-link">Education</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#certifications" class="nav-link">Certifications</a></li>
+      </ul>
+    </nav>
+
+    <div class="socials">
+      <a href="https://github.com/xDaryamo" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+        <Icon name="mdi:github" width={20} height={20} />
+      </a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <Icon name="mdi:linkedin" width={20} height={20} />
+      </a>
+      <a href="mailto:email@example.com" aria-label="Email">
+        <Icon name="mdi:email" width={20} height={20} />
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = document.querySelectorAll('section');
+  const visibleSections = new Set();
+
+  function updateActiveNav() {
+    // 1. Check Top (Priority: Top wins if page is very short and at top)
+    if (window.scrollY < 100) {
+      navLinks.forEach((link, i) => {
+        link.classList.toggle('active', i === 0);
+      });
+      return;
+    }
+
+    // 2. Check Bottom (Priority: Bottom wins if we are strictly at the bottom)
+    // Use a small buffer to ensure we catch the bottom on all browsers
+    if ((window.innerHeight + window.scrollY) >= document.documentElement.scrollHeight - 10) {
+      navLinks.forEach((link) => link.classList.remove('active'));
+      if (navLinks.length > 0) {
+        navLinks[navLinks.length - 1].classList.add('active');
+      }
+      return;
+    }
+
+    // 3. Standard Intersection Logic
+    navLinks.forEach((link) => link.classList.remove('active'));
+
+    // Find the last visible section (priority to lower sections during transition)
+    let activeId = null;
+    // Iterate in DOM order
+    sections.forEach((section) => {
+      const id = section.getAttribute('id');
+      if (visibleSections.has(id)) {
+        activeId = id;
+      }
+    });
+
+    if (activeId) {
+      const activeLink = document.querySelector(`.nav-link[href="#${activeId}"]`);
+      if (activeLink) {
+        activeLink.classList.add('active');
+      }
+    }
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const id = entry.target.getAttribute('id');
+      if (entry.isIntersecting) {
+        visibleSections.add(id);
+      } else {
+        visibleSections.delete(id);
+      }
+    });
+    updateActiveNav();
+  }, {
+    rootMargin: '-30% 0px -60% 0px',
+    threshold: 0
+  });
+
+  sections.forEach((section) => observer.observe(section));
+
+  window.addEventListener('scroll', () => {
+    updateActiveNav();
+  }, { passive: true });
+
+  // Initial check
+  updateActiveNav();
+</script>
+
+<style>
+  .sidebar {
+    position: relative;
+    padding-top: 0;
+  }
+
+  .sidebar-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    max-height: 100vh;
+    padding: 5.5rem 0 3rem;
+  }
+
+  .profile-photo-wrapper {
+    margin-bottom: 2rem;
+    width: 250px;
+    height: 250px;
+    border-radius: 24%;
+    overflow: hidden;
+    border: 1px solid var(--lightest-navy);
+    box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    background-color: var(--light-navy);
+    cursor: default;
+  }
+
+  /* Target the Image inside the React component if needed, or rely on inline style passed to Image */
+  /* .profile-photo img styles removed as they are now inline or managed by GlareHover/Image props */
+
+
+  .identity .name {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--lightest-slate);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .identity .title {
+    font-size: 1.25rem;
+    color: var(--lightest-slate);
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+
+  .identity .tagline {
+    max-width: 300px;
+    color: var(--slate);
+    line-height: 1.5;
+  }
+
+  .resume-cta {
+    margin-top: 2.5rem;
+  }
+
+  :global(.resume-pixel-card) {
+    border: 1px solid var(--green);
+    border-radius: 4px;
+    background: rgba(100, 255, 218, 0.02);
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    display: inline-block;
+  }
+
+  :global(.resume-pixel-card:hover) {
+    background-color: rgba(100, 255, 218, 0.1);
+  }
+
+  .resume-link {
+    position: relative;
+    z-index: 1;
+    color: var(--green);
+    text-decoration: none;
+    font-family: var(--font-mono, monospace);
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: block;
+    padding: 1.25rem 1.75rem;
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  .nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 0;
+    color: var(--slate);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    transition: all 0.3s ease;
+  }
+
+  .nav-link:hover, .nav-link.active {
+    color: var(--lightest-slate);
+  }
+
+  .nav-link:hover::before, .nav-link.active::before {
+    width: 3rem;
+    background-color: var(--lightest-slate);
+  }
+
+  .nav-link::before {
+    content: '';
+    display: inline-block;
+    width: 1rem;
+    height: 1px;
+    background-color: var(--slate);
+    margin-right: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .socials {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: auto;
+  }
+
+  .socials a {
+    color: var(--slate);
+    transition: color 0.3s ease;
+  }
+
+  .socials a:hover {
+    color: var(--lightest-slate);
+  }
+
+  /* Desktop Styles (Sidebar becomes sticky) */
+  @media (min-width: 1024px) {
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      width: 30%;
+      padding: 0 2rem;
+    }
+  }
+
+  /* Mobile Styles */
+  @media (max-width: 1023px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      padding: 5rem 1.5rem 3rem;
+    }
+    
+    .sidebar-content {
+      padding: 0;
+      gap: 2rem;
+    }
+    
+    .nav {
+      display: none; /* Often hidden on mobile or turned into a hamburger */
+    }
+  }
+</style>
