@@ -1,3 +1,13 @@
+# [2.0.0](https://github.com/xDaryamo/portfolio/compare/v1.0.12...v2.0.0) (2026-01-11)
+
+
+* feat!: overhaul project structure and implement personal portfolio UI ([ae2e38d](https://github.com/xDaryamo/portfolio/commit/ae2e38d98103897ab3b69250035cb7f6c7016821))
+
+
+### BREAKING CHANGES
+
+* This release completely replaces the default Astro starter template with the custom portfolio application architecture, removing previous layout and component structures.
+
 ## [1.0.12](https://github.com/xDaryamo/portfolio/compare/v1.0.11...v1.0.12) (2026-01-05)
 
 
