@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/xDaryamo/portfolio/compare/v2.1.1...v2.1.2) (2026-01-13)
+
+
+### Bug Fixes
+
+* **layout:** update border color for Squares component ([6bccadc](https://github.com/xDaryamo/portfolio/commit/6bccadc52713c5abdeb0eca70d6ccfe194418954))
+
 ## [2.1.1](https://github.com/xDaryamo/portfolio/compare/v2.1.0...v2.1.1) (2026-01-13)
 
 
