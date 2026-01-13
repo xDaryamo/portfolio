@@ -21,6 +21,7 @@
     "astro": "^5.16.6",
     "astro-icon": "^1.1.5",
     "framer-motion": "^12.23.26",
+    "marked": "^17.0.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "sharp": "^0.34.5"

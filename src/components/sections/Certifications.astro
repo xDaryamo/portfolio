@@ -1,7 +1,10 @@
 ---
-import { certifications } from '../../data/certifications';
+import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
+
+const certifications = (await getCollection('certifications'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <section id="certifications" class="section">
@@ -9,8 +12,8 @@ import { Icon } from 'astro-icon/components';
   <div class="cert-group">
     {
       certifications.map((cert) => {
-        const isLink = cert.url && cert.url !== '#';
-        const attachmentLink = cert.attachment || cert.url;
+        const isLink = cert.data.url && cert.data.url !== '#';
+        const attachmentLink = cert.data.attachment || cert.data.url;
         
         return (
           <div class="cert-card group">
@@ -18,10 +21,10 @@ import { Icon } from 'astro-icon/components';
               <div class="image-container">
                  {attachmentLink ? (
                     <a href={attachmentLink} target="_blank" rel="noreferrer" class="image-link cert-image-wrapper">
-                      {cert.image ? (
+                      {cert.data.image ? (
                         <Image 
-                          src={cert.image} 
-                          alt={`Preview of ${cert.title}`} 
+                          src={cert.data.image} 
+                          alt={`Preview of ${cert.data.title}`} 
                           class="cert-preview-image" 
                           width={200}
                         />
@@ -44,24 +47,24 @@ import { Icon } from 'astro-icon/components';
               <div class="content-col">
                 <h3 class="cert-header">
                   {isLink ? (
-                    <a href={cert.url} target="_blank" rel="noreferrer" class="cert-link">
+                    <a href={cert.data.url} target="_blank" rel="noreferrer" class="cert-link">
                       <span class="title">
-                        {cert.title}
+                        {cert.data.title}
                         <Icon name="heroicons:arrow-up-right-20-solid" class="link-icon" />
                       </span>
                     </a>
                   ) : (
-                    <span class="title">{cert.title}</span>
+                    <span class="title">{cert.data.title}</span>
                   )}
                 </h3>
                 
                 <div class="cert-meta">
-                  <span class="issuer">{cert.issuer}</span>
+                  <span class="issuer">{cert.data.issuer}</span>
                   <span class="separator">•</span>
-                  <span class="date">{cert.date}</span>
+                  <span class="date">{cert.data.dateStr}</span>
                 </div>
 
-                {cert.id && <p class="cert-id">{cert.id}</p>}
+                {cert.data.id && <p class="cert-id">{cert.data.id}</p>}
               </div>
             </div>
           </div>

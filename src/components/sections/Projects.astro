@@ -1,8 +1,11 @@
 ---
 import { Image } from 'astro:assets';
-import { projects } from '../../data/projects';
+import { getCollection } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import Markdown from '../Markdown.astro';
+
+const projects = (await getCollection('projects'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const fetchOgImage = async (url: string): Promise<string | null> => {
   const controller = new AbortController();
@@ -34,14 +37,14 @@ const fetchOgImage = async (url: string): Promise<string | null> => {
 
 const projectsWithImages = await Promise.all(
   projects.slice(0, 4).map(async (project) => {
-    let image = project.image;
+    let image: ImageMetadata | string | undefined | null = project.data.image;
     if (!image) {
-      const targetUrl = project.github || project.external;
+      const targetUrl = project.data.github || project.data.external;
       if (targetUrl && targetUrl !== '#') {
         image = await fetchOgImage(targetUrl) || undefined;
       }
     }
-    return { ...project, image };
+    return { ...project.data, image };
   })
 );
 ---

@@ -1,7 +1,10 @@
 ---
-import { jobs } from '../../data/experience';
+import { getCollection } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import Markdown from '../Markdown.astro';
+
+const jobs = (await getCollection('experience'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <section id="experience" class="section">
@@ -9,43 +12,43 @@ import Markdown from '../Markdown.astro';
   <div class="experience-group">
     {
       jobs.map((job) => {
-        const isLink = job.url && job.url !== '#';
+        const isLink = job.data.url && job.data.url !== '#';
         return (
           <div class="experience-card group">
             <div class="grid-layout">
               <div class="range-container">
-                <span class="range">{job.range}</span>
-                <p class="location">{job.location}</p>
+                <span class="range">{job.data.range}</span>
+                <p class="location">{job.data.location}</p>
               </div>
               <div class="content-col">
                 <h3 class="job-header">
                   {isLink ? (
-                    <a href={job.url} target="_blank" rel="noreferrer" class="job-link">
+                    <a href={job.data.url} target="_blank" rel="noreferrer" class="job-link">
                       <span class="title">
-                        {job.title}
+                        {job.data.title}
                         <Icon name="heroicons:arrow-up-right-20-solid" class="link-icon" />
                       </span>
-                      <span class="company">{job.company}</span>
+                      <span class="company">{job.data.company}</span>
                     </a>
                   ) : (
                     <>
-                      <span class="title">{job.title}</span>
-                      <span class="company">{job.company}</span>
+                      <span class="title">{job.data.title}</span>
+                      <span class="company">{job.data.company}</span>
                     </>
                   )}
                 </h3>
                 <p class="summary">
-                  <Markdown content={job.summary} />
+                  <Markdown content={job.data.summary} />
                 </p>
                 <ul class="achievements">
-                  {job.achievements.map((item) => (
+                  {job.data.achievements.map((item) => (
                     <li>
                       <Markdown content={item} />
                     </li>
                   ))}
                 </ul>
                 <div class="tech-pills">
-                  {job.tech.map((tech) => (
+                  {job.data.tech.map((tech) => (
                     <span class="pill">{tech}</span>
                   ))}
                 </div>
