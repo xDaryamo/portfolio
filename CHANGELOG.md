@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/xDaryamo/portfolio/compare/v2.0.0...v2.1.0) (2026-01-13)
+
+
+### Features
+
+* **ui:** enhance mobile layout and improve project robustness ([90be198](https://github.com/xDaryamo/portfolio/commit/90be1982f98f9f99e0148262438392c222be6c90))
+
 # [2.0.0](https://github.com/xDaryamo/portfolio/compare/v1.0.12...v2.0.0) (2026-01-11)
 
 
