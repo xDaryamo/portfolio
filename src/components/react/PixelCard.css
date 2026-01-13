@@ -19,7 +19,7 @@
   user-select: none;
   /* Defaults that can be overridden */
   background: transparent;
-  border-radius: 8px; 
+  border-radius: clamp(4px, 1vh, 8px); 
 }
 
 .pixel-card::before {
