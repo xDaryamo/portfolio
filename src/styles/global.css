@@ -2,8 +2,8 @@
   --navy: #0a192f;
   --light-navy: #112240;
   --lightest-navy: #233554;
-  --slate: #8892b0;
-  --light-slate: #a8b2d1;
+  --slate: #a8b2d1;
+  --light-slate: #c5ceeb;
   --lightest-slate: #ccd6f6;
   --white: #e6f1ff;
   --green: #64ffda;
@@ -86,15 +86,16 @@ p {
   display: flex;
   align-items: center;
   margin-bottom: 2rem;
-  font-size: 1.5rem;
+  font-size: 1.1rem;
   color: var(--lightest-slate);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
-.section-title::after {
-  content: "";
-  display: block;
-  width: 200px;
-  height: 1px;
-  background-color: var(--lightest-navy);
-  margin-left: 20px;
+/* Hide section titles on desktop where sidebar is present */
+@media (min-width: 1024px) {
+  .section-title {
+    display: none;
+  }
 }

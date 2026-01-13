@@ -1,46 +1,56 @@
-# Astro Starter Kit: Basics
+# Dario Mazza - Personal Portfolio
 
-```sh
-pnpm create astro@latest -- --template basics
-```
+This is the source code for my personal portfolio website. It serves as a showcase of my technical projects, professional experience, and certifications.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The site is built with **Astro** for optimal performance, using a content-driven approach with TypeScript for type safety.
 
-## 🚀 Project Structure
+## ✨ Features & Tech Stack
 
-Inside of your Astro project, you'll see the following folders and files:
+- **Framework:** [Astro](https://astro.build/) (v5.x)
+- **UI & Interactivity:** React components with Framer Motion for smooth animations.
+- **Styling:** Custom CSS with a focus on dark mode and high-performance rendering.
+- **Icons:** [Astro Icon](https://www.astroicon.dev/) leveraging Iconify (Heroicons, MDI).
+- **Typography:** Inter and JetBrains Mono via Fontsource.
+- **Package Manager:** pnpm
+
+## 📂 Project Structure
 
 ```text
 /
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+├── public/           # Static assets (Resume, PDF reports, favicons)
+├── src/
+│   ├── assets/       # Optimized images and media
+│   ├── components/   # UI Components (.astro and .tsx)
+│   ├── data/         # Content definitions (experience.ts, projects.ts)
+│   ├── layouts/      # Page layouts (Base and Home)
+│   ├── pages/        # File-based routing (index.astro, archive.astro)
+│   └── styles/       # Global CSS and themes
+└── package.json      # Dependencies and scripts
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🛠️ Development
 
-## 🧞 Commands
+### Setup
 
-All commands are run from the root of the project, from a terminal:
+1.  **Install dependencies:**
+    ```bash
+    pnpm install
+    ```
+2.  **Start development server:**
+    ```bash
+    pnpm dev
+    ```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+### Build
 
-## 👀 Want to learn more?
+To generate the static site for production:
+```bash
+pnpm build
+```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 🎨 Credits & Inspiration
+
+The design and layout of this portfolio are heavily inspired by the work of **[Brittany Chiang](https://brittanychiang.com/)**. I've adapted the aesthetic to suit my personal branding and technical needs.
+
+---
+© 2026 Dario Mazza
