@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/xDaryamo/portfolio/compare/v2.1.0...v2.1.1) (2026-01-13)
+
+
+### Bug Fixes
+
+* **layout:** improve sidebar and content alignment on small heights ([02985a3](https://github.com/xDaryamo/portfolio/commit/02985a3b76ce99e51fc344d162e1269d16bb6dd6))
+
 # [2.1.0](https://github.com/xDaryamo/portfolio/compare/v2.0.0...v2.1.0) (2026-01-13)
 
 
