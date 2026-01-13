@@ -1,7 +1,10 @@
 ---
-import { education } from '../../data/education';
+import { getCollection } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import Markdown from '../Markdown.astro';
+
+const education = (await getCollection('education'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
 <section id="education" class="section">
@@ -9,34 +12,34 @@ import Markdown from '../Markdown.astro';
   <div class="education-group">
     {
       education.map((edu) => {
-        const isLink = edu.url && edu.url !== '#';
+        const isLink = edu.data.url && edu.data.url !== '#';
         return (
           <div class="education-card group">
             <div class="grid-layout">
               <div class="range-container">
-                <span class="range">{edu.range}</span>
-                {edu.location && <p class="location">{edu.location}</p>}
+                <span class="range">{edu.data.range}</span>
+                {edu.data.location && <p class="location">{edu.data.location}</p>}
               </div>
               <div class="content-col">
                 <h3 class="edu-header">
                   {isLink ? (
-                    <a href={edu.url} target="_blank" rel="noreferrer" class="edu-link">
+                    <a href={edu.data.url} target="_blank" rel="noreferrer" class="edu-link">
                       <span class="degree">
-                        {edu.degree}
+                        {edu.data.degree}
                         <Icon name="heroicons:arrow-up-right-20-solid" class="link-icon" />
                       </span>
-                      <span class="institution">{edu.institution}</span>
+                      <span class="institution">{edu.data.institution}</span>
                     </a>
                   ) : (
                     <>
-                      <span class="degree">{edu.degree}</span>
-                      <span class="institution">{edu.institution}</span>
+                      <span class="degree">{edu.data.degree}</span>
+                      <span class="institution">{edu.data.institution}</span>
                     </>
                   )}
                 </h3>
-                {edu.summary && <p class="summary"><Markdown content={edu.summary} /></p>}
+                {edu.data.summary && <p class="summary"><Markdown content={edu.data.summary} /></p>}
                 <div class="achievements">
-                  {edu.achievements.map((item) => (
+                  {edu.data.achievements.map((item) => (
                     <p><Markdown content={item} /></p>
                   ))}
                 </div>

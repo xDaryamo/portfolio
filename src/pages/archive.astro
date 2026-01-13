@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { projects } from '../data/projects';
+import { getCollection } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import { Image } from 'astro:assets';
 import Markdown from '../components/Markdown.astro';
 
-const sortedProjects = projects.sort((a, b) => b.date.localeCompare(a.date));
+const projects = await getCollection('projects');
+const sortedProjects = projects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const fetchOgImage = async (url: string): Promise<string | null> => {
   try {
@@ -22,14 +23,14 @@ const fetchOgImage = async (url: string): Promise<string | null> => {
 
 const projectsWithImages = await Promise.all(
   sortedProjects.map(async (project) => {
-    let image = project.image;
+    let image: ImageMetadata | string | undefined | null = project.data.image;
     if (!image) {
-      const targetUrl = project.github || project.external;
+      const targetUrl = project.data.github || project.data.external;
       if (targetUrl && targetUrl !== '#') {
         image = await fetchOgImage(targetUrl) || undefined;
       }
     }
-    return { ...project, image };
+    return { ...project.data, image };
   })
 );
 ---
@@ -52,7 +53,7 @@ const projectsWithImages = await Promise.all(
           const mainLink = isLocked ? null : (project.external || project.github);
           // Check if image is an imported asset (object) or a URL string
           const isLocalImage = typeof project.image === 'object' && project.image !== null;
-          const year = project.date.split('-')[0];
+          const year = new Date(project.date).getFullYear();
 
           const footerLinks = [];
           if (project.links) {

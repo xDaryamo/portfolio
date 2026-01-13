@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon/components';
+import { marked } from 'marked';
 
 interface Props {
   content: string;
@@ -7,34 +7,34 @@ interface Props {
 
 const { content } = Astro.props;
 
-// Split by links [text](url) and bold **text**
-const parts = content.split(/(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*)/g);
----
-{
-  parts.map((part) => {
-    if (part.startsWith('[') && part.includes('](')) {
-      const match = part.match(/\[([^\]]+)\]\(([^)]+)\)/);
-      if (match) {
-        return (
-          <a href={match[2]} target="_blank" rel="noreferrer" class="inline-link">
-            <Astro.self content={match[1]} />
-            <Icon name="heroicons:arrow-up-right-20-solid" class="inline-link-icon" aria-hidden="true" />
-          </a>
-        );
-      }
-    }
-    if (part.startsWith('**') && part.endsWith('**')) {
-      return <strong><Astro.self content={part.slice(2, -2)} /></strong>;
-    }
-    return <Fragment set:html={part} />;
-  })
-}
+const renderer = new marked.Renderer();
 
-<style>
+// Customize link rendering to match previous style with icon
+renderer.link = ({ href, title, text }) => {
+  // SVG for heroicons:arrow-up-right-20-solid
+  const iconSvg = `<svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="inline-link-icon"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z" clip-rule="evenodd"></path></svg>`;
+  
+  const titleAttr = title ? ` title="${title}"` : '';
+  return `<a href="${href}"${titleAttr} target="_blank" rel="noreferrer" class="inline-link">${text}${iconSvg}</a>`;
+};
+
+// Use parseInline to avoid wrapping in <p> tags since this is often used inside <p> or <span>
+const html = await marked.parseInline(content, { renderer });
+---
+
+<Fragment set:html={html} />
+
+<style is:global>
+  /* Made global because the content is now injected via set:html */
   .inline-link {
     display: inline-flex;
     align-items: baseline;
     text-decoration: none;
+    color: var(--green); /* Ensure color consistency */
+  }
+
+  .inline-link:hover {
+    text-decoration: underline;
   }
 
   .inline-link-icon {
@@ -43,9 +43,17 @@ const parts = content.split(/(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*)/g);
     margin-left: 0.1rem;
     transition: transform 0.2s;
     flex-shrink: 0;
+    vertical-align: middle;
+    display: inline-block;
   }
 
   .inline-link:hover .inline-link-icon {
     transform: translate(2px, -2px);
+  }
+  
+  /* Ensure bold text inherits color properly */
+  strong {
+    font-weight: 700;
+    color: var(--lightest-slate);
   }
 </style>
