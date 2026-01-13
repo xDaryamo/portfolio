@@ -1,3 +1,10 @@
+## [2.1.3](https://github.com/xDaryamo/portfolio/compare/v2.1.2...v2.1.3) (2026-01-13)
+
+
+### Bug Fixes
+
+* **projects:** improve OG image fetching reliability with retries and longer timeout ([d5d1102](https://github.com/xDaryamo/portfolio/commit/d5d1102987c28397a2992283f64613e0bf3dc197))
+
 ## [2.1.2](https://github.com/xDaryamo/portfolio/compare/v2.1.1...v2.1.2) (2026-01-13)
 
 
