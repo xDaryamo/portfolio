@@ -1,3 +1,10 @@
+## [2.2.1](https://github.com/xDaryamo/portfolio/compare/v2.2.0...v2.2.1) (2026-01-14)
+
+
+### Bug Fixes
+
+* **homelab:** update project date to December 2025 ([71ce45f](https://github.com/xDaryamo/portfolio/commit/71ce45fa26b857f759f9be8dac034b67c83db9ac))
+
 # [2.2.0](https://github.com/xDaryamo/portfolio/compare/v2.1.4...v2.2.0) (2026-01-14)
 
 
