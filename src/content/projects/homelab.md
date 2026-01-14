@@ -1,7 +1,7 @@
 ---
 title: "Homelab"
 description: "A personal homelab configuration and documentation repository. Managing self-hosted services, network configuration, and automation scripts."
-date: 2025-01-01
+date: 2025-12-01
 tech:
   - Kubernetes
   - Flux CD
