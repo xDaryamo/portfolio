@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/xDaryamo/portfolio/compare/v2.1.4...v2.2.0) (2026-01-14)
+
+
+### Features
+
+* **projects:** allow manual ordering of featured projects on home page ([f32df63](https://github.com/xDaryamo/portfolio/commit/f32df633a49f47470611692c76382e7b03216bea))
+
 ## [2.1.4](https://github.com/xDaryamo/portfolio/compare/v2.1.3...v2.1.4) (2026-01-14)
 
 

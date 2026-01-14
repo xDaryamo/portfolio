@@ -1,7 +1,7 @@
 {
   "name": "tmp-project",
   "type": "module",
-  "version": "2.1.4",
+  "version": "2.2.0",
   "scripts": {
     "dev": "astro dev --host",
     "build": "astro build",
