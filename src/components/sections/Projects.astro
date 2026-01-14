@@ -4,8 +4,18 @@ import { getCollection } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import Markdown from '../Markdown.astro';
 
-const projects = (await getCollection('projects'))
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+// Define the featured projects in the desired order by their slug
+const FEATURED_PROJECTS = [
+  'homelab',
+  'puccini-tosca-compiler',
+  'retosca',
+  'codesmile'
+];
+
+const allProjects = await getCollection('projects');
+const projects = FEATURED_PROJECTS
+  .map(slug => allProjects.find(p => p.slug === slug))
+  .filter((p): p is typeof allProjects[number] => p !== undefined);
 
 const fetchOgImage = async (url: string, retries = 3): Promise<string | null> => {
   for (let i = 0; i < retries; i++) {
@@ -47,7 +57,7 @@ const fetchOgImage = async (url: string, retries = 3): Promise<string | null> =>
 };
 
 const projectsWithImages = await Promise.all(
-  projects.slice(0, 4).map(async (project) => {
+  projects.map(async (project) => {
     let image: ImageMetadata | string | undefined | null = project.data.image;
     if (!image) {
       const targetUrl = project.data.github || project.data.external;
