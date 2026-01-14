@@ -8,17 +8,43 @@ import Markdown from '../components/Markdown.astro';
 const projects = await getCollection('projects');
 const sortedProjects = projects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
-const fetchOgImage = async (url: string): Promise<string | null> => {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) return null;
-    const html = await response.text();
-    const match = html.match(/<meta property="og:image" content="([^"]+)"/);
-    return match ? match[1] : null;
-  } catch (error) {
-    console.error(`Error fetching OG image for ${url}:`, error);
-    return null;
+const fetchOgImage = async (url: string, retries = 3): Promise<string | null> => {
+  for (let i = 0; i < retries; i++) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 seconds timeout
+
+    try {
+      const response = await fetch(url, {
+        signal: controller.signal,
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        }
+      });
+      
+      clearTimeout(timeoutId);
+
+      if (response.ok) {
+        const html = await response.text();
+        const match = html.match(/<meta property="og:image" content="([^"]+)"/);
+        return match ? match[1] : null;
+      }
+    } catch (error) {
+      clearTimeout(timeoutId);
+      const isLastAttempt = i === retries - 1;
+      
+      if (error instanceof Error && error.name === 'AbortError') {
+        console.warn(`Timeout fetching OG image for ${url} (Attempt ${i + 1}/${retries})`);
+      } else {
+        console.error(`Error fetching OG image for ${url} (Attempt ${i + 1}/${retries}):`, error);
+      }
+
+      if (isLastAttempt) return null;
+      
+      // Wait 1 second before retrying
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }
   }
+  return null;
 };
 
 const projectsWithImages = await Promise.all(
