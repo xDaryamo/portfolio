@@ -1,3 +1,10 @@
+## [2.2.2](https://github.com/xDaryamo/portfolio/compare/v2.2.1...v2.2.2) (2026-01-21)
+
+
+### Bug Fixes
+
+* **projects:** implement caching for external OG images to improve loading performance ([1856f48](https://github.com/xDaryamo/portfolio/commit/1856f48c4cf47a508026f818f739ddfb0244023c))
+
 ## [2.2.1](https://github.com/xDaryamo/portfolio/compare/v2.2.0...v2.2.1) (2026-01-14)
 
 
