@@ -1,3 +1,10 @@
+## [2.2.3](https://github.com/xDaryamo/portfolio/compare/v2.2.2...v2.2.3) (2026-01-21)
+
+
+### Bug Fixes
+
+* **utils:** limit concurrency and add delays to prevent rate limiting ([dd4b3e0](https://github.com/xDaryamo/portfolio/commit/dd4b3e01f72f8c749a17995a8b2d7d9c84fdade3))
+
 ## [2.2.2](https://github.com/xDaryamo/portfolio/compare/v2.2.1...v2.2.2) (2026-01-21)
 
 
