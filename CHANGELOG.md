@@ -1,3 +1,11 @@
+# [2.3.0](https://github.com/xDaryamo/portfolio/compare/v2.2.3...v2.3.0) (2026-02-17)
+
+
+### Features
+
+* **assets:** update resume and add cached OG images ([c8c1fad](https://github.com/xDaryamo/portfolio/commit/c8c1fad85ab53f8c5a23daf44806deddd17da772))
+* **projects:** implement OG image caching and update schema ([8a0d4ec](https://github.com/xDaryamo/portfolio/commit/8a0d4ec7763be712017a5140b6475e05fac975fa))
+
 ## [2.2.3](https://github.com/xDaryamo/portfolio/compare/v2.2.2...v2.2.3) (2026-01-21)
 
 
