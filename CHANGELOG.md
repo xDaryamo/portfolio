@@ -1,3 +1,11 @@
+## [2.3.1](https://github.com/xDaryamo/portfolio/compare/v2.3.0...v2.3.1) (2026-02-17)
+
+
+### Bug Fixes
+
+* **docker:** add image source label to Dockerfile ([f11cac9](https://github.com/xDaryamo/portfolio/commit/f11cac98cc47b6fd43802bb9fb522ff7d112e28b))
+* **docker:** switch to classic semantic-release with exec plugin for docker ([273a7b0](https://github.com/xDaryamo/portfolio/commit/273a7b09b5ee17e68cff19dab288a094742628f1))
+
 # [2.3.0](https://github.com/xDaryamo/portfolio/compare/v2.2.3...v2.3.0) (2026-02-17)
 
 
