@@ -1,5 +1,7 @@
 FROM node:22-alpine
 
+LABEL org.opencontainers.image.source=https://github.com/xDaryamo/portfolio
+
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
