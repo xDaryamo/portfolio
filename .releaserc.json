@@ -13,10 +13,9 @@
     ],
 
     [
-      "semantic-release-docker",
+      "@semantic-release/exec",
       {
-        "name": "ghcr.io/xdaryamo/portfolio",
-        "registryUrl": "ghcr.io"
+        "publishCmd": "docker tag portfolio ghcr.io/xdaryamo/portfolio:${nextRelease.version} && docker push ghcr.io/xdaryamo/portfolio:${nextRelease.version} && docker tag portfolio ghcr.io/xdaryamo/portfolio:latest && docker push ghcr.io/xdaryamo/portfolio:latest"
       }
     ],
 
