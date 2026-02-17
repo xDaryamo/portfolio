@@ -1,6 +1,6 @@
 ---
 title: "ReTOSCA"
-description: "Developed a proof-of-concept (PoC) to reverse engineer Terraform (AWS) configurations into TOSCA 2.0, translating intent via a deterministic pipeline and exploring an AI (RAG) based approach."
+description: "A Proof-of-Concept (PoC) framework to reverse-engineer AWS Terraform configurations into TOSCA 2.0 standards."
 date: 2025-10-01
 tech:
   - Python
@@ -14,6 +14,9 @@ external: "#"
 image: "../../assets/projects/retosca.jpg"
 isPrivate: true
 privateReason: "Repo private for paper publication"
+achievements:
+  - "**Deterministic Pipeline**: Developed a mapping engine to translate cloud infrastructure intent into standardized TOSCA topology templates."
+  - "**AI-Driven RAG**: Researched and explored a **Retrieval-Augmented Generation (RAG)** approach to resolve complex semantic mapping ambiguities."
 links:
   - label: "Master Thesis"
     url: "/projects/retosca/master-thesis.pdf"

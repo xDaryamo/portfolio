@@ -1,6 +1,6 @@
 ---
 title: "Puccini TOSCA Compiler"
-description: "Contributed to the Go implementation of the open-source Puccini TOSCA compiler by implementing the grammar specification for TOSCA 2.0. This work involved mapping the new standard definitions into the existing codebase to enable validation of updated topology templates. Following the successful integration of my work, I was invited by the project creator to become a core maintainer of the repository."
+description: "Major contribution to the Go-based open-source TOSCA compiler to support the new 2.0 grammar specification."
 date: 2025-10-01
 tech:
   - Go
@@ -9,6 +9,9 @@ tech:
   - Open Source
 github: "https://github.com/tliron/go-puccini"
 external: "https://github.com/tliron/go-puccini"
+achievements:
+  - "**TOSCA 2.0 Support**: Implemented the full grammar specification for the updated standard, mapping new definitions into the existing compiler architecture."
+  - "**Maintainer Status**: Promoted to core repository maintainer by the project creator following successful integration and validation of contributions."
 links:
   - label: "Pull Request"
     url: "https://github.com/tliron/go-puccini/pull/149"
