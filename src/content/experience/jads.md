@@ -1,19 +1,17 @@
 ---
-title: "Research Assistant (Erasmus+ Traineeship)"
-company: "JADS (Jheronimus Academy of Data Science)"
+title: "Research Assistant Intern (Erasmus+ Traineeship)"
+company: "Jheronimus Academy of Data Science"
 location: "'s-Hertogenbosch, Netherlands"
-range: "Feb 2025 — Jun 2025"
+range: "Feb 2025 – Jun 2025"
 url: "https://www.jads.nl/"
 date: 2025-02-01
-summary: "Conducted research on Infrastructure-as-Code (IaC) interoperability as part of my Master’s Thesis. I engineered a proof-of-concept pipeline to reverse-engineer proprietary AWS Terraform configurations into the open standard TOSCA 2.0, comparing deterministic parsing techniques against AI-driven approaches using Retrieval-Augmented Generation (RAG)."
+summary: "Engineered ReTOSCA, a Proof-of-Concept framework to reverse-engineer AWS Terraform configurations into TOSCA 2.0 standards, resolving mapping ambiguities via a deterministic pipeline and Retrieval-Augmented Generation (RAG)."
 achievements:
-  - "Core Contributor to **[Puccini](https://github.com/tliron/puccini)**: Implemented full TOSCA 2.0 grammar support in the **puccini** TOSCA compiler. My contributions were merged upstream, leading to my promotion as a Project Maintainer."
-  - "IaC Transpilation: Developed a hybrid conversion engine capable of mapping complex cloud infrastructure states to standardized topology templates."
-  - "RAG Implementation: Experimented with LLMs to automate the translation of non-standard infrastructure definitions, enhancing semantic mapping accuracy."
+  - "Implemented full TOSCA 2.0 standard support for the **[go-puccini](https://github.com/tliron/puccini)** open-source compiler using Go; the contribution was validated and merged into the official repository used by the global community."
 tech:
+  - Python
   - Go
   - Terraform
   - TOSCA
-  - Python
   - LangChain/RAG
 ---
