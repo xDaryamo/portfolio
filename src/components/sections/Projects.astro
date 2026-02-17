@@ -8,6 +8,7 @@ import { fetchOgImage } from '../../utils/og-images';
 // Define the featured projects in the desired order by their slug
 const FEATURED_PROJECTS = [
   'homelab',
+  'aws-serverless',
   'puccini-tosca-compiler',
   'retosca',
   'codesmile'
@@ -91,12 +92,21 @@ const projectsWithImages = await Promise.all(
                   )}
                 </h3>
                 
-                                <p class="description">
-                                  <Markdown content={project.description} />
-                                </p>
-                
-                                <div class="project-links">
-                                  {footerLinks.map((link) => (
+                                                <p class="description">
+                                                  <Markdown content={project.description} />
+                                                </p>
+                                
+                                                {project.achievements && (
+                                                  <ul class="achievements">
+                                                    {project.achievements.map((item) => (
+                                                      <li>
+                                                        <Markdown content={item} />
+                                                      </li>
+                                                    ))}
+                                                  </ul>
+                                                )}
+                                                
+                                                <div class="project-links">                                  {footerLinks.map((link) => (
                                     <a href={link.url} target="_blank" rel="noreferrer" class="text-link">
                                       <Icon name={link.isGithub ? "mdi:github" : "heroicons:paper-clip-20-solid"} class="mini-icon" />
                                       {link.label}
@@ -280,6 +290,30 @@ const projectsWithImages = await Promise.all(
                     line-height: 1.5;
                     position: relative;
                     z-index: 1;
+                  }
+                
+                  .achievements {
+                    margin: 0 0 1rem 0;
+                    padding: 0;
+                    list-style: none;
+                    position: relative;
+                    z-index: 1;
+                  }
+                
+                  .achievements li {
+                    position: relative;
+                    padding-left: 1.5rem;
+                    margin-bottom: 0.5rem;
+                    font-size: 0.9rem;
+                    color: var(--slate);
+                  }
+                
+                  .achievements li::before {
+                    content: '▹';
+                    position: absolute;
+                    left: 0;
+                    color: var(--green);
+                    line-height: 1.2;
                   }
                 
                   /* Links Row */

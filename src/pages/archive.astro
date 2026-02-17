@@ -101,6 +101,16 @@ const projectsWithImages = await Promise.all(
                     <Markdown content={project.description} />
                   </p>
   
+                  {project.achievements && (
+                    <ul class="achievements">
+                      {project.achievements.map((item) => (
+                        <li>
+                          <Markdown content={item} />
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
                   <div class="project-links">
                     {footerLinks.map((link) => (
                       <a href={link.url} target="_blank" rel="noreferrer" class="text-link">
@@ -361,6 +371,30 @@ const projectsWithImages = await Promise.all(
     line-height: 1.6;
     position: relative;
     z-index: 1;
+  }
+
+  .achievements {
+    margin: 0 0 1.25rem 0;
+    padding: 0;
+    list-style: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  .achievements li {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--slate);
+  }
+
+  .achievements li::before {
+    content: '▹';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    line-height: 1.2;
   }
 
   /* Links Row */

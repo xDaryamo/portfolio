@@ -12,6 +12,7 @@ const projects = defineCollection({
     image: image().optional(),
     isPrivate: z.boolean().optional(),
     privateReason: z.string().optional(),
+    achievements: z.array(z.string()).optional(),
     links: z.array(z.object({
       label: z.string(),
       url: z.string()
