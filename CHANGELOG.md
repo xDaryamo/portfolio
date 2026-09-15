@@ -1,3 +1,15 @@
+# [2.4.0](https://github.com/xDaryamo/portfolio/compare/v2.3.1...v2.4.0) (2026-09-15)
+
+
+### Bug Fixes
+
+* **ci:** allow esbuild and sharp build scripts for pnpm ([68e24a9](https://github.com/xDaryamo/portfolio/commit/68e24a912735fa6d0b3091e430b1cabedc1291e9))
+
+
+### Features
+
+* **experience:** add DevSecOps Engineer role at Seacom ([50d080b](https://github.com/xDaryamo/portfolio/commit/50d080b0f3ea074053ee6c400a04ed71cfd33fc2))
+
 ## [2.3.1](https://github.com/xDaryamo/portfolio/compare/v2.3.0...v2.3.1) (2026-02-17)
 
 
